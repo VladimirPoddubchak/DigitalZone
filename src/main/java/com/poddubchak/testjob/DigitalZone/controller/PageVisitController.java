@@ -22,29 +22,25 @@ public class PageVisitController {
     @Autowired
     PageVisitService pageVisitService;
 
-
-    @GetMapping("/test")
-    String  sayHello(){
-        return "Hello from statistic";
-    }
-
     /**
      curl -H "Content-Type: application/json" -X POST -d {\"userId\":1,\"pageId\":1}  http://localhost:8080/statistic/visit
      */
     @PostMapping("/visit")
-    HttpEntity<CommonStatDto> getAssessList(@RequestBody PageVisitDto dto){
+    HttpEntity<CommonStatDto> visitEvent(@RequestBody PageVisitDto dto){
         log.info("VisitPageDto: "+dto);
         CommonStatDto result = pageVisitService.visitEvent(dto);
+        log.info("result: "+result);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.badRequest().build();
     }
 
     /**
-     curl -H "Content-Type: application/json" -X POST -d {\"start\":\"2020-07-21T00:00:00.000+00:00\",\"end\":\"2020-07-31T00:00:00.000+00:00\"}  http://localhost:8080/statistic/period
+     curl -H "Content-Type: application/json" -X POST -d {\"start\":\"2020-07-30T18:23:01.225\",\"end\":\"2020-07-31T00:00:00.000\"}  http://localhost:8080/statistic/period
      */
     @PostMapping("/period")
-    HttpEntity<PeriodStatDto> getAssessList(@RequestBody PeriodDto periodDto){
+    HttpEntity<PeriodStatDto> getStatistic(@RequestBody PeriodDto periodDto){
         log.info("PeriodDto: "+periodDto);
         PeriodStatDto result = pageVisitService.periodStat(periodDto);
+        log.info("result: "+result);
         return result != null ? ResponseEntity.ok(result) : ResponseEntity.badRequest().build();
     }
 }

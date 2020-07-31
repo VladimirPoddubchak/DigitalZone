@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,5 +30,5 @@ public class PageVisit {
     @Column(name = "page_id")
     Long pageId;
     @Column(name = "visit_date")
-    Date visitDate;
+    LocalDateTime visitDate;
 }

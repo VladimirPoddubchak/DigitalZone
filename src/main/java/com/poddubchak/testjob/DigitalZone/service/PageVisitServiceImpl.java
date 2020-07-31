@@ -9,7 +9,7 @@ import com.poddubchak.testjob.DigitalZone.repo.PageVisitRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by @author Vladimir Poddubchak @date 29.07.2020.
@@ -28,8 +28,8 @@ public class PageVisitServiceImpl implements PageVisitService{
 
     @Override
     public PeriodStatDto periodStat(PeriodDto periodDto) {
-        Date start = periodDto.getStart();
-        Date end = periodDto.getEnd();
+        LocalDateTime start = periodDto.getStart();
+        LocalDateTime end = periodDto.getEnd();
         return new PeriodStatDto(pageVisitRepo.getTotalVisitByPeriod(start,end),
                                 pageVisitRepo.getUniqueVisitByPeriod(start,end),
                                 pageVisitRepo.getRegularVisitByPeriod(start,end));
@@ -40,7 +40,7 @@ public class PageVisitServiceImpl implements PageVisitService{
         return PageVisit.builder()
                 .userId(pageVisitDto.getUserId())
                 .pageId(pageVisitDto.getPageId())
-                .visitDate(new Date())
+                .visitDate(LocalDateTime.now())
                 .build();
     }
 }

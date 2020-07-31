@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -29,14 +31,14 @@ public interface PageVisitRepo extends CrudRepository<PageVisit,Long> {
     @Query(value = "SELECT COUNT(user_id) " +
                     "FROM page_visit " +
                     "WHERE DATE(visit_date) BETWEEN DATE(:start) and DATE(:end)",nativeQuery = true)
-    Long getTotalVisitByPeriod(@Param("start") Date start,
-                               @Param("end")Date end);
+    Long getTotalVisitByPeriod(@Param("start") LocalDateTime start,
+                               @Param("end")LocalDateTime end);
 
     @Query(value = "SELECT COUNT (DISTINCT user_id) " +
                    "FROM page_visit " +
                    "WHERE DATE(visit_date) BETWEEN DATE(:start) and DATE(:end)", nativeQuery = true)
-    Long getUniqueVisitByPeriod(@Param("start") Date start,
-                                @Param("end")Date end);
+    Long getUniqueVisitByPeriod(@Param("start") LocalDateTime start,
+                                @Param("end")LocalDateTime end);
 
 
 @Query(value = "WITH regular_users AS(" +
@@ -44,11 +46,11 @@ public interface PageVisitRepo extends CrudRepository<PageVisit,Long> {
                         "FROM page_visit " +
                         "WHERE DATE(visit_date) BETWEEN DATE(:start) and DATE(:end) " +
                         "GROUP BY user_id " +
-                        "HAVING COUNT(user_id)>=3 )" +
+                        "HAVING COUNT(user_id)>=10 )" +
                 "SELECT COUNT(*) user_id " +
                 "FROM regular_users", nativeQuery = true)
-    Long getRegularVisitByPeriod(@Param("start") Date start,
-                                 @Param("end")Date end);
+    Long getRegularVisitByPeriod(@Param("start") LocalDateTime start,
+                                 @Param("end")LocalDateTime end);
 }
 
 

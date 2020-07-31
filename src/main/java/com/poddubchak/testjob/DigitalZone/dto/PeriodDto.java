@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by @author Vladimir Poddubchak @date 29.07.2020.
@@ -15,6 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PeriodDto {
-    Date start;
-    Date end;
+    LocalDateTime start;
+    LocalDateTime end;
 }
