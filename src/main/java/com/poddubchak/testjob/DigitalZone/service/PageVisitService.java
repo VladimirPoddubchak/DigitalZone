@@ -11,7 +11,6 @@ import com.poddubchak.testjob.DigitalZone.model.PageVisit;
  */
 
 public interface PageVisitService {
-
     CommonStatDto visitEvent(PageVisitDto pageVisitDto);
     PeriodStatDto periodStat(PeriodDto periodDto);
     PageVisit fromDto (PageVisitDto pageVisitDto);
